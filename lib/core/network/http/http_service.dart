@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:movies_app/core/network/error_handler/network_exceptions.dart';
 
@@ -29,7 +27,6 @@ class HttpService {
         queryParameters: queryParameters,
         options: Options(extra: {'withToken': withToken}),
       );
-      log("status code is ${response.statusCode} $response");
       return expectedResponseModel(response.data);
     } catch (error) {
       final errorMessage = NetworkExceptions.getDioException(error);
@@ -51,7 +48,6 @@ class HttpService {
         queryParameters: queryParameters,
         options: Options(extra: {'withToken': withToken}),
       );
-      log("status code is ${response.statusCode}");
       return expectedResponseModel(response.data);
     } catch (error) {
       final errorMessage = NetworkExceptions.getDioException(error);
@@ -73,7 +69,6 @@ class HttpService {
         queryParameters: queryParameters,
         options: Options(extra: {'withToken': withToken}),
       );
-      log("status code is ${response.statusCode}");
       return expectedResponseModel(response.data);
     } catch (error) {
       final errorMessage = NetworkExceptions.getDioException(error);

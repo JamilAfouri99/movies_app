@@ -7,4 +7,6 @@ abstract class ApiConstants {
   static const String nowPlayingMoviesPath = '/movie/now_playing?api_key=${ApiBaseConstants.key}';
   static const String popularMoviesPath = '/movie/popular?api_key=${ApiBaseConstants.key}';
   static const String topRatedMoviesPath = '/movie/top_rated?api_key=${ApiBaseConstants.key}';
+  static const String baseImageUrl = 'https://image.tmdb.org/t/p/w500';
+  static String imageUrl(String path) => '$baseImageUrl$path';
 }
