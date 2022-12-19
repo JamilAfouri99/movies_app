@@ -3,23 +3,30 @@ import 'package:movies_app/movies/data/datasource/movie_remote_datasource.dart';
 import 'package:movies_app/movies/data/repository/movie_repository.dart';
 import 'package:movies_app/movies/domain/repository/base_movies_repo.dart';
 import 'package:movies_app/movies/domain/usercases/now_playing_movies.dart';
+import 'package:movies_app/movies/domain/usercases/popular_movies_usecase.dart';
+import 'package:movies_app/movies/domain/usercases/top_rated_movies_usecase.dart';
 import 'package:movies_app/movies/presentation/controller/movie_bloc.dart';
 
-final serviceLocator = GetIt.instance;
+final sl = GetIt.instance;
 
 class ServicesLocator {
   void init() {
     // Use cases
-    serviceLocator.registerFactory(() => MoviesBloc(serviceLocator()));
+    sl.registerFactory(() => MoviesBloc(
+          sl(),
+          sl(),
+          sl(),
+        ));
 
     // Use cases
-    serviceLocator.registerLazySingleton(() => NowPlayingMoviesUseCase(serviceLocator()));
+    sl.registerLazySingleton(() => NowPlayingMoviesUseCase(sl()));
+    sl.registerLazySingleton(() => PopularMoviesUseCase(sl()));
+    sl.registerLazySingleton(() => TopRatedMoviesUseCase(sl()));
 
     // Repository
-    serviceLocator
-        .registerLazySingleton<BaseMoviesRepository>(() => MoviesRepository(serviceLocator()));
+    sl.registerLazySingleton<BaseMoviesRepository>(() => MoviesRepository(sl()));
 
     // Data source
-    serviceLocator.registerLazySingleton<BaseMovieRemoteDataSource>(() => MovieRemoteDataSource());
+    sl.registerLazySingleton<BaseMovieRemoteDataSource>(() => MovieRemoteDataSource());
   }
 }
